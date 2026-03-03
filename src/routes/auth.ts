@@ -89,12 +89,38 @@ router.post('/complete-assessment', requireAuth, async (req: AuthRequest, res: R
 
 // POST /api/auth/set-college
 router.post('/set-college', requireAuth, async (req: AuthRequest, res: Response) => {
-  const { collegeId } = req.body;
+  const { collegeId, collegeName, city } = req.body as {
+    collegeId?: string;
+    collegeName?: string;
+    city?: string;
+  };
+
+  let resolvedCollegeId: string | null = null;
+
+  if (collegeId) {
+    resolvedCollegeId = collegeId;
+  } else if (collegeName && typeof collegeName === 'string' && collegeName.trim().length > 0) {
+    const name = collegeName.trim();
+
+    // Try to find an existing college by name, otherwise create a minimal record
+    let college = await prisma.college.findFirst({ where: { name } });
+    if (!college) {
+      college = await prisma.college.create({
+        data: {
+          name,
+          city: city || '',
+          state: '',
+        }
+      });
+    }
+
+    resolvedCollegeId = college.id;
+  }
 
   const user = await prisma.user.update({
     where: { id: req.userId! },
     data: {
-      collegeId: collegeId || null,
+      collegeId: resolvedCollegeId,
       collegeSelected: true,
     },
     include: { college: true }
