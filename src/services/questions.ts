@@ -17,6 +17,14 @@ const EASY: Question[] = [
   { question: 'What is 50% of 340?', options: ['160', '170', '180', '150'], answer: '170' },
   { question: 'Solve: x − 9 = 15', options: ['22', '23', '24', '25'], answer: '24' },
   { question: 'What is 6 × 11?', options: ['56', '66', '76', '46'], answer: '66' },
+  { question: 'What is 18 ÷ 3?', options: ['5', '6', '7', '8'], answer: '6' },
+  { question: 'What is 10% of 250?', options: ['15', '20', '25', '30'], answer: '25' },
+  { question: 'Solve: x + 7 = 19', options: ['10', '11', '12', '13'], answer: '12' },
+  { question: 'What is 8 × 9?', options: ['64', '72', '81', '96'], answer: '72' },
+  { question: 'What is 3/5 of 50?', options: ['20', '25', '30', '35'], answer: '30' },
+  { question: 'What is 7²?', options: ['42', '47', '49', '56'], answer: '49' },
+  { question: 'What is 1/4 of 64?', options: ['12', '14', '16', '18'], answer: '16' },
+  { question: 'Solve: 5x = 45', options: ['7', '8', '9', '10'], answer: '9' },
 ];
 
 const MEDIUM: Question[] = [
@@ -32,6 +40,14 @@ const MEDIUM: Question[] = [
   { question: 'Simplify: 3² + 4²', options: ['20', '25', '30', '35'], answer: '25' },
   { question: 'If 5x = 85, x = ?', options: ['15', '16', '17', '18'], answer: '17' },
   { question: 'What is 20% of 650?', options: ['120', '130', '140', '110'], answer: '130' },
+  { question: 'What is 18²?', options: ['284', '304', '324', '344'], answer: '324' },
+  { question: 'Solve: 7x − 9 = 33', options: ['5', '6', '7', '8'], answer: '6' },
+  { question: 'What is 35% of 400?', options: ['120', '130', '140', '150'], answer: '140' },
+  { question: 'A train goes 150km in 2.5hrs. Speed?', options: ['50', '55', '60', '65'], answer: '60' },
+  { question: 'What is (5/8) of 320?', options: ['180', '190', '200', '210'], answer: '200' },
+  { question: 'Simplify: 6³ ÷ 6', options: ['6', '18', '36', '216'], answer: '36' },
+  { question: 'If x/3 = 9, x = ?', options: ['18', '21', '24', '27'], answer: '27' },
+  { question: 'What is √289?', options: ['15', '16', '17', '18'], answer: '17' },
 ];
 
 const HARD: Question[] = [
@@ -47,6 +63,14 @@ const HARD: Question[] = [
   { question: 'What is LCM of 12 and 18?', options: ['24', '36', '48', '72'], answer: '36' },
   { question: 'Simplify: (a+b)² − (a−b)²', options: ['2ab', '4ab', 'a²+b²', '2a²'], answer: '4ab' },
   { question: 'If x% of 200 = 50, x = ?', options: ['20', '25', '30', '15'], answer: '25' },
+  { question: 'Solve: 3x² − 12x = 0, x = ?', options: ['0,2', '0,3', '2,3', '3,4'], answer: '0,4' },
+  { question: 'What is the sum of angles in a pentagon?', options: ['360°', '450°', '540°', '720°'], answer: '540°' },
+  { question: 'If 2⁴ · 2ˣ = 2⁹, x = ?', options: ['3', '4', '5', '6'], answer: '5' },
+  { question: 'A number is increased by 20% and then decreased by 20%. Net change?', options: ['0%', '2% decrease', '4% decrease', '5% decrease'], answer: '4% decrease' },
+  { question: 'Solve: (x − 3)/5 = 4', options: ['15', '17', '19', '23'], answer: '23' },
+  { question: 'What is the cube root of 512?', options: ['6', '7', '8', '9'], answer: '8' },
+  { question: 'Simplify: (1/2 + 1/3)', options: ['5/6', '3/5', '2/5', '4/5'], answer: '5/6' },
+  { question: 'If a:b = 2:3 and b:c = 4:5, what is a:c?', options: ['8:15', '3:5', '4:7', '6:5'], answer: '8:15' },
 ];
 
 function shuffle<T>(arr: T[]): T[] {
@@ -81,10 +105,6 @@ export function getQuestions(count: number = 10, difficulty: 'easy' | 'mixed' | 
 }
 
 export function getAssessmentQuestions(): Question[] {
-  // Fixed 10 questions for skill assessment — mix of all difficulties
-  return [
-    EASY[0], EASY[1], EASY[2],
-    MEDIUM[0], MEDIUM[1], MEDIUM[2], MEDIUM[3],
-    HARD[0], HARD[1], HARD[2],
-  ];
+  // 10-question mixed set for assessment — sampled to reduce repetition
+  return getQuestions(10, 'mixed');
 }

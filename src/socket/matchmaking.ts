@@ -66,14 +66,18 @@ export function setupMatchmaking(io: Server, socket: Socket, userId: string, rat
       // Notify both players
       const matchPayload = {
         matchId,
+        mode,
         questions: questions.map(q => ({ question: q.question, options: q.options })), // No answer sent!
         opponent: p2,
+        playerIndex: 1 as const,
       };
 
       const oppMatchPayload = {
         matchId,
+        mode,
         questions: questions.map(q => ({ question: q.question, options: q.options })),
         opponent: p1,
+        playerIndex: 2 as const,
       };
 
       socket.emit('match:found', matchPayload);
